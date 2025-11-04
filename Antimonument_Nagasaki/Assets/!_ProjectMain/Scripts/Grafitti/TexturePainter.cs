@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.IO;
 using System;
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.InputSystem;
 
 public enum Painter_BrushMode{PAINT,DECAL};
 public class TexturePainter : MonoBehaviour {
@@ -13,6 +15,8 @@ public class TexturePainter : MonoBehaviour {
 	public RenderTexture canvasTexture; // Render Texture that looks at our Base Texture and the painted brushes
 	public Material baseMaterial; // The material of our base texture (Were we will save the painted texture
     public GameObject GunPaint; //The Model for the Painting
+
+	public InputActionProperty triggerAction;
 	
 	//Textures and models for painting
 	public Texture2D tex;            
@@ -121,14 +125,14 @@ public class TexturePainter : MonoBehaviour {
 
                 if (mode == Painter_BrushMode.PAINT)
                 {
-                    if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))  //More  BrushStrokes with one buttonpress
+                    if (triggerAction.action.IsPressed())  //More  BrushStrokes with one buttonpress
                     {
                         DoAction();
                     }
                 }
                 else
                 {
-                    if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))   // only one Sticker with one buttonpress
+                    if (triggerAction.action.WasPressedThisFrame())   // only one Sticker with one buttonpress
                     {
                         DoAction();
                     }

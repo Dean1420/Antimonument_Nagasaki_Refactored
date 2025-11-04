@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class Statue : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Statue : MonoBehaviour
 
     void Start()
     {
-        if (GetComponent<OVRGrabbable>() != null)
+        if (GetComponent<XRGrabInteractable>() != null)
             IsGrabbable = false;
     }
 }

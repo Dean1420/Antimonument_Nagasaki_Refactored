@@ -78,6 +78,7 @@ Material:
     - _TwoSided: 0
     - _WINDQUALITY: 4
     - _WindQuality: 4
+    - _XRMotionVectorsPass: 1
     m_Colors:
     - _Color: {r: 0.9264706, g: 0.9264706, b: 0.9264706, a: 0.75}
     - _HueVariationColor: {r: 0.9264706, g: 0.9264706, b: 0.9264706, a: 1}

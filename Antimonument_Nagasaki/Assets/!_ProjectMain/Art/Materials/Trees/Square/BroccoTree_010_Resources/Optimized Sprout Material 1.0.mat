@@ -24,8 +24,7 @@ Material:
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
-  disabledShaderPasses:
-  - MOTIONVECTORS
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -78,6 +77,7 @@ Material:
     - _TwoSided: 0
     - _WINDQUALITY: 4
     - _WindQuality: 4
+    - _XRMotionVectorsPass: 1
     m_Colors:
     - _Color: {r: 0.89705884, g: 0.89705884, b: 0.89705884, a: 0.725}
     - _HueVariationColor: {r: 0.89705884, g: 0.89705884, b: 0.89705884, a: 1}

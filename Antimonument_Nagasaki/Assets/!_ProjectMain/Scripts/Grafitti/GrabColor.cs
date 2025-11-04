@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GrabColor : MonoBehaviour
 {
@@ -66,6 +67,13 @@ public class GrabColor : MonoBehaviour
 
     
     public float SizeValue = 0.3f;          // for the BrushSize
+
+
+
+    public InputActionProperty triggerAction;
+    public InputActionProperty handTriggerRightAction;
+    public InputActionProperty handTriggerLeftAction;
+
 
 
     // Start is called before the first frame update
@@ -290,7 +298,7 @@ public class GrabColor : MonoBehaviour
             }*/
 
             //COLOR PICKER
-            if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+            if (triggerAction.action.WasPressedThisFrame())
             {
 
                 if (hit.collider.tag == "Painting")
@@ -401,7 +409,7 @@ public class GrabColor : MonoBehaviour
             {
                 TexPaint.brushCursor.SetActive(true);
 
-                if (OVRInput.Get(OVRInput.RawButton.RHandTrigger))
+                if (handTriggerRightAction.action.IsPressed())
                 {
                     if (SizeValue <= 0.6f)
                     {
@@ -431,7 +439,7 @@ public class GrabColor : MonoBehaviour
                     }
                 }*/
 
-                if (OVRInput.Get(OVRInput.RawButton.LHandTrigger) && TexPaint.mode == Painter_BrushMode.DECAL)
+                if (handTriggerLeftAction.action.IsPressed() && TexPaint.mode == Painter_BrushMode.DECAL)
 
                 {
                     TexPaint.brushrotate += rotateint;
