@@ -94,7 +94,7 @@ public class TakePhoto : MonoBehaviour
 
         if (col.gameObject == HandCol && !_isPressed && transform.localPosition.y <= 0.042)
         {
-                Debug.Log(col.gameObject);
+               // Debug.Log(col.gameObject);
                 Pressed();      
         }
 
@@ -106,7 +106,7 @@ public class TakePhoto : MonoBehaviour
 
         if (other.gameObject == HandCol && !_isPressed && transform.localPosition.y <= 0.042)
         {
-            Debug.Log(other.gameObject);
+            //Debug.Log(other.gameObject);
             Pressed();
         }
     }
@@ -124,7 +124,7 @@ public class TakePhoto : MonoBehaviour
     {
         _isPressed = true;
         onPressed.Invoke();
-        Debug.Log("Pressed");
+       // Debug.Log("Pressed");
         StartCoroutine(CameraFlashEffect());
     }
 
@@ -132,7 +132,7 @@ public class TakePhoto : MonoBehaviour
     {
         _isPressed = false;
         onReleased.Invoke();
-        Debug.Log("Released");
+       // Debug.Log("Released");
     }
 
 

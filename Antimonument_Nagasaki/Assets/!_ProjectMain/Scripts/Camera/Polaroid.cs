@@ -10,24 +10,6 @@ public class Polaroid : MonoBehaviour
     public Camera cam;
     public Texture2D tex2d;
 
-
-    
-
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        tex2d = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.ARGB32, false);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
-
     public void PhotoTake()
     {
         StartCoroutine(MakePhoto());
