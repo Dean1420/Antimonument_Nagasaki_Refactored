@@ -88,28 +88,8 @@ public class TakePhoto : MonoBehaviour
     }
 
 
-    void OnCollisionStay(Collision col)
-    {
-        Debug.Log("Col = " + col.gameObject.name + _isPressed + transform.localPosition.y );
 
-        if (col.gameObject == HandCol && !_isPressed && transform.localPosition.y <= 0.042)
-        {
-               // Debug.Log(col.gameObject);
-                Pressed();      
-        }
 
-    }
-
-    void OnTriggerStay(Collider other)
-    {
-        Debug.Log("Stay = " + other.gameObject.name + _isPressed + transform.localPosition.y);
-
-        if (other.gameObject == HandCol && !_isPressed && transform.localPosition.y <= 0.042)
-        {
-            //Debug.Log(other.gameObject);
-            Pressed();
-        }
-    }
 
     private float GetValue()
     {

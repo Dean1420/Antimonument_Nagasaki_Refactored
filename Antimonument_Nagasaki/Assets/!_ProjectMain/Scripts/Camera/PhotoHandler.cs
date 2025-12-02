@@ -39,12 +39,12 @@ public class PhotoHandler : MonoBehaviour
     public void CreatePolaroid()
     {
         UpdateCurrentImage();
+        
         RenderCurrentImageOnPolaroid();
-        Debug.Log("rendered");
+        
         // camera effects
 
-        // start polaraoid spawning
-        //StartCoroutine(SpawnPolaroid());
+        StartCoroutine(SpawnPolaroid());
     }
 
 
@@ -82,14 +82,20 @@ public class PhotoHandler : MonoBehaviour
         RenderTexture.active = null;
     }
 
-    IEnumerator SpawnPolaroid()
+
+
+    private IEnumerator SpawnPolaroid()
     {
-        //cameraShutter.Play();
-        //cameraFlash.SetActive(true);
-        //yield return new WaitForSeconds(flashT);
-        //cameraFlash.SetActive(false);
-        //TakePolaroid();
-        return null;
+        yield return SpawnEffects();
+    }
+
+    private IEnumerator SpawnEffects()
+    {
+        cameraShutter.Play();
+
+        cameraFlash.SetActive(true);
+        yield return new WaitForSeconds(flashTime);
+        cameraFlash.SetActive(false);
     }
 
     void UploadPolaroid()
