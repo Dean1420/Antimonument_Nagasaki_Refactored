@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEditor.Rendering;
 
 
 public class PhotoHandler : MonoBehaviour
@@ -39,9 +40,9 @@ public class PhotoHandler : MonoBehaviour
     public void CreatePolaroid()
     {
         UpdateCurrentImage();
-        
+
         RenderCurrentImageOnPolaroid();
-        
+
         // camera effects
 
         StartCoroutine(SpawnPolaroid());
@@ -87,7 +88,19 @@ public class PhotoHandler : MonoBehaviour
     private IEnumerator SpawnPolaroid()
     {
         yield return SpawnEffects();
+        MovePolaroidToCamera();
+
     }
+
+
+
+    private void MovePolaroidToCamera()
+    {
+        polaroid.transform.position = polaroidSpawnPosition.position;
+        polaroid.transform.rotation = polaroidSpawnPosition.rotation;
+    }
+
+
 
     private IEnumerator SpawnEffects()
     {
