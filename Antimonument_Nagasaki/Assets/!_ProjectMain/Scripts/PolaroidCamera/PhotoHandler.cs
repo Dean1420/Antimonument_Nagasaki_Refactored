@@ -5,6 +5,9 @@ using UnityEngine;
 using System.Collections;
 using UnityEditor.Rendering;
 
+using LocalStorageOperations;
+using System.Collections.Generic;
+
 
 public class PhotoHandler : MonoBehaviour
 {
@@ -40,20 +43,20 @@ public class PhotoHandler : MonoBehaviour
     public void CreatePolaroid()
     {
         UpdateCurrentImage();
-
         RenderCurrentImageOnPolaroid();
-
-        // camera effects
-
         StartCoroutine(SpawnPolaroid());
+        Debug.Log("POLAROID >>> successfully rendered and spawned");
+
+        UploadPolaroid();
+        Debug.Log($"POLAROID >>> successfully uploaded");
+
     }
 
-
+    
 
     private void RenderCurrentImageOnPolaroid()
     {
         Transform quadTransform = polaroid.transform.Find("Quad");
-        Debug.Log(quadTransform);
         MeshRenderer renderer = quadTransform.GetComponent<MeshRenderer>();
         Material mat = new Material(Shader.Find("Unlit/Texture"));
         mat.mainTexture = currentImage;
@@ -89,7 +92,22 @@ public class PhotoHandler : MonoBehaviour
     {
         yield return SpawnEffects();
         MovePolaroidToCamera();
+        yield return PolaroidSpawnAnimation();
 
+    }
+
+
+
+    private IEnumerator PolaroidSpawnAnimation()
+    {
+        polaroid.transform.Rotate(90f, 90f, 0f);
+        Vector3 stepDistance = -1 * polaroidSpawnPosition.forward * 0.015f;
+        float stepDelay = 0.1f;
+        for (int i = 0; i < 10; i++)
+        {
+            polaroid.transform.localPosition += stepDistance;
+            yield return new WaitForSeconds(stepDelay);
+        }
     }
 
 
@@ -118,8 +136,18 @@ public class PhotoHandler : MonoBehaviour
         // prepare image for ftp
 
         // get ftp credentials
+        Dictionary<string, string> credentials = LoadCredentials();
 
         // upload image
+    }
+
+
+
+    private Dictionary<string, string> LoadCredentials()
+    {
+        string pathToCredentials = "!_ProjectMain/Scripts/PolaroidCamera/credentials_example.txt";
+        string separator = ":";
+        return TextFile.LoadLinesByKeyValue(pathToCredentials, separator);
     }
 
 }
