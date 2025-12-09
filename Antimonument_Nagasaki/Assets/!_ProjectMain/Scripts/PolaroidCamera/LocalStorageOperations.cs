@@ -42,10 +42,10 @@ namespace LocalStorageOperations
 
                     if (parts.Length != 2)
                     {
-                    Debug.LogWarning($"LOCAL STORAGE >>> invalid line format: " + line);
-                    continue;
+                        Debug.LogWarning($"LOCAL STORAGE >>> invalid line format: " + line);
+                        continue;
                     }
-                    
+
                     // remove white space
                     string key = parts[0].Trim();
                     string value = parts[1].Trim();
@@ -71,6 +71,21 @@ namespace LocalStorageOperations
             }
 
             return data;
+        }
+    }
+
+    public static class Image
+    {
+        public static void SaveTextureAsJpg(Texture2D texture, string relativePath, string filename)
+        {
+            byte[] bytes = texture.EncodeToJPG();
+            string fullPath = Path.Combine(
+                Application.dataPath,
+                relativePath,
+                filename
+            );
+            File.WriteAllBytes(fullPath, bytes);
+            Debug.Log($"LOCAL STORAGE >>> texture stored as jpg at: " + fullPath );
         }
     }
 }

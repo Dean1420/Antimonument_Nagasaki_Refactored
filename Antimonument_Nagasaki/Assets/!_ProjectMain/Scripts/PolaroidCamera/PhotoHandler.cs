@@ -4,9 +4,11 @@
 using UnityEngine;
 using System.Collections;
 using UnityEditor.Rendering;
-
+using Ftp;
 using LocalStorageOperations;
 using System.Collections.Generic;
+using System.IO;
+using System;
 
 
 public class PhotoHandler : MonoBehaviour
@@ -52,7 +54,7 @@ public class PhotoHandler : MonoBehaviour
 
     }
 
-    
+
 
     private void RenderCurrentImageOnPolaroid()
     {
@@ -131,21 +133,28 @@ public class PhotoHandler : MonoBehaviour
 
     void UploadPolaroid()
     {
-        // get current image displayed on polaroid
+        byte[] currentImageJpg = currentImage.EncodeToJPG();
+        string fileType = ".jpg";
 
-        // prepare image for ftp
-
-        // get ftp credentials
         Dictionary<string, string> credentials = LoadCredentials();
 
-        // upload image
+        string timestamp = DateTime.Now.ToString("yyyy.MM.dd_HH.mm");
+        string filename = "file_";
+        Ftp.FtpHandler.uploadFile(
+            credentials["username"],
+            credentials["username"],
+            credentials["url"],
+            credentials["remoteDirectory"],
+            timestamp + filename + fileType,
+            currentImageJpg);
+
     }
 
 
 
     private Dictionary<string, string> LoadCredentials()
     {
-        string pathToCredentials = "!_ProjectMain/Scripts/PolaroidCamera/credentials_example.txt";
+        string pathToCredentials = "!_ProjectMain/Scripts/PolaroidCamera/credentials.txt";
         string separator = ":";
         return TextFile.LoadLinesByKeyValue(pathToCredentials, separator);
     }
