@@ -4,8 +4,11 @@ using PublisherSubscriber;
 
 public class SubscribeSelectedPose : MonoBehaviour
 {
-    [SerializeField] private GameObject[] statueObjects;
-    [SerializeField] private GameObject currentStatue;
+    [SerializeField] private GameObject[] smallStatueObjects;
+    [SerializeField] private GameObject currentSmallStatue;
+    [SerializeField] private GameObject[] bigStatueObjects;
+    [SerializeField] private GameObject currentBigStatue;
+
 
 
     void Start()
@@ -16,12 +19,21 @@ public class SubscribeSelectedPose : MonoBehaviour
 
 
     private void OnPoseSelected(object sender, string poseName)
-    {       
-        currentStatue.SetActive(false);
+    {   
+        // replace small statue
+        currentSmallStatue.SetActive(false);
         
-        GameObject statue = Array.Find(statueObjects, p => p.name == poseName);
-        statue.SetActive(true);
-        currentStatue = statue;
+        GameObject smallStatue = Array.Find(smallStatueObjects, p => p.name == poseName);
+        smallStatue.SetActive(true);
+        currentSmallStatue = smallStatue;
+
+        // replace big statue
+        currentBigStatue.SetActive(false);
+        
+        GameObject bigStatue = Array.Find(bigStatueObjects, p => p.name == poseName);
+        bigStatue.SetActive(true);
+        currentBigStatue = bigStatue;
+
         Debug.Log("STATUE >>> activated: " + poseName);
     }
 }
