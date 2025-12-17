@@ -23,18 +23,6 @@ public class TexturePainter : MonoBehaviour {
 	public Texture2D tex2;			
 	public GameObject statue;       
 
-	//Additional textures and models for different Objects
-	// public Texture2D LöweTex;
-	// public Texture2D LöweTexTemp;
-	// public GameObject LöweStatue;
- 
-	// public Texture2D SchneckeTex;
-	// public Texture2D SchneckeTexTemp;
-    // public GameObject SchneckeStatue;
- 
-	// public Texture2D JuenglingTex;
-	// public Texture2D JuenglingTexTemp;
-	// public GameObject JuenglingStatue;
 	public GameObject tmpStatue;
 
 	//Save textures
@@ -50,11 +38,7 @@ public class TexturePainter : MonoBehaviour {
 	public Sprite sprite6;
 	public Material StickerPickerMat;
 
-	//Change Skyboxes
-	// public Material SkyBoxLöwe;
-	// public Material SkyBoxSchnecke;
-	public Material SkyBoxHub;
-	// public Material SkyBoxJüngling;
+		public Material SkyBoxHub;
 
 	public SoundManager soundManager;
 
@@ -85,22 +69,6 @@ public class TexturePainter : MonoBehaviour {
 
 	void Start()
     {
-	 //    if (LöweStatue.activeSelf == true)
-  //       {
-  //           colTest.SockelLoewe(true);
-		// }
-  //
-  //       if (SchneckeStatue.activeSelf == true)
-  //       {
-  //           colTest.SockelSchnecke(true);
-		// }
-  //
-  //       if (JuenglingStatue.activeSelf == true)
-		// {
-		// 	colTest.SockelJuengling(true);
-		// }
-
-
 		if (PlayerPrefs.GetInt("saves") == 0)				//Amount of saved textures and loads saved texture count from Playerprefs
         {
 			PlayerPrefs.SetInt("saves", 0);
@@ -530,34 +498,4 @@ public class TexturePainter : MonoBehaviour {
 			Destroy(brushEntity);
 		}
 	}
-
-    /*public void SavePNG()
-	{
-		RenderTexture mRt = new RenderTexture(canvasTexture.width, canvasTexture.height, canvasTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
-		mRt.antiAliasing = canvasTexture.antiAliasing;
-
-		var tex = new Texture2D(mRt.width, mRt.height, TextureFormat.ARGB32, false);
-		cam.targetTexture = mRt;
-		cam.Render();
-		RenderTexture.active = mRt;
-
-		tex.ReadPixels(new Rect(0, 0, mRt.width, mRt.height), 0, 0);
-		tex.Apply();
-
-		var path = "Assets/Textures/Rendered textures/" + fileName + ".png";
-		File.WriteAllBytes(path, tex.EncodeToPNG());
-		Debug.Log("Saved file to: " + path);
-
-		DestroyImmediate(tex);
-
-		cam.targetTexture = rt;
-		cam.Render();
-		RenderTexture.active = rt;
-
-		DestroyImmediate(mRt);
-	}*/
-
-
-
-
 }

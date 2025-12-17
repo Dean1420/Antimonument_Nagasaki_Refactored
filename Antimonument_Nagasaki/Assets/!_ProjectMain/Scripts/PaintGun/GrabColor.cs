@@ -101,62 +101,6 @@ public class GrabColor : MonoBehaviour
     void Update()
     {
         RayCastPicker();
-
-        /*if (ThumbButton.controller.GetButtonDown(WebXR.WebXRController.ButtonTypes.ButtonA))
-        {
-            counterStat++;
-
-            if (counterStat > 2)
-                counterStat = 0;
-
-            if (counterStat == 0)
-            {
-                TexPaint.restoreMaterial();
-                TexPaint.L�weStatue.SetActive(true);
-                TexPaint.SchneckeStatue.SetActive(false);
-                TexPaint.JuenglingStatue.SetActive(false);
-
-                TexPaint.statue = TexPaint.L�weStatue;
-                TexPaint.tex = TexPaint.L�weTex;
-                TexPaint.tex2 = TexPaint.L�weTexTemp;
-
-                RenderSettings.skybox = TexPaint.SkyBoxL�we;
-
-            }
-
-            if (counterStat == 1)
-            {
-                TexPaint.restoreMaterial();
-                TexPaint.L�weStatue.SetActive(false);
-                TexPaint.SchneckeStatue.SetActive(true);
-                TexPaint.JuenglingStatue.SetActive(false);
-
-                TexPaint.statue = TexPaint.SchneckeStatue;
-                TexPaint.tex = TexPaint.SchneckeTex;
-                TexPaint.tex2 = TexPaint.SchneckeTexTemp;
-
-                RenderSettings.skybox = TexPaint.SkyBoxSchnecke;
-            }
-
-            if (counterStat == 2)
-            {
-                TexPaint.restoreMaterial();
-                TexPaint.L�weStatue.SetActive(false);
-                TexPaint.SchneckeStatue.SetActive(false);
-                TexPaint.JuenglingStatue.SetActive(true);
-
-                TexPaint.statue = TexPaint.JuenglingStatue;
-                TexPaint.tex = TexPaint.JuenglingTex;
-                TexPaint.tex2 = TexPaint.JuenglingTexTemp;
-            }
-
-            //statue.GetComponent<MeshRenderer>().material = baseMaterial;
-            TexPaint.statue.GetComponent<MeshRenderer>().material.mainTexture = TexPaint.canvasTexture;
-            //rendTex.GetComponent<MeshRenderer>().material = baseMaterial;
-            TexPaint.rendTex.GetComponent<MeshRenderer>().material.mainTexture = TexPaint.tex;
-
-            Debug.Log(counterStat);
-        }*/
     }
 
 
