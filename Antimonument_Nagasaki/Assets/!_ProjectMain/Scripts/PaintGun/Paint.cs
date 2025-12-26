@@ -1,6 +1,6 @@
-using System;
+/* using System;
 using System.Runtime.CompilerServices;
-using NUnit.Framework.Constraints;
+using NUnit.Framework.Constraints; */
 using UnityEngine;
 
 public class Paint : MonoBehaviour
@@ -15,14 +15,19 @@ public class Paint : MonoBehaviour
     private Renderer targetRenderer;
     private RaycastHit raycastHit;
 
+    private bool continuePainting = false;
+
     void Start()
     {
-
+    particles.Stop();
     }
 
     void Update()
     {
-        // render the paint pointer   
+        if (continuePainting && (Time.frameCount % 15 == 0))
+        {
+            PaintOnRenderTexture();
+        }
     }
 
     public void TogglePaintPointer()
@@ -33,14 +38,22 @@ public class Paint : MonoBehaviour
     public void StartPainting()
     {
         EnableEffects();
+        PaintOnRenderTexture();
+        continuePainting = true;
+    }
 
+    private void PaintOnRenderTexture()
+    {
         ShootRaycast();
 
         if (!CheckIfPaintable())
         {
-            return;
         }
+        ApplyPaint();
+    }
 
+    private void ApplyPaint()
+    {
         CopyTexture();
 
         pixelUV = raycastHit.textureCoord;
@@ -53,27 +66,103 @@ public class Paint : MonoBehaviour
         // Apply the changes and update the material
         copyTexture.Apply();
         targetRenderer.material.SetTexture("_MainTex", copyTexture);
-
     }
-
 
     private void CopyTexture()
     {
+        /*  targetRenderer = raycastHit.transform.GetComponent<Renderer>();
+
+         Texture originalTexture = targetRenderer.material.GetTexture("_MainTex");
+
+         copyTexture = new Texture2D(originalTexture.width, originalTexture.height);
+         Graphics.CopyTexture(originalTexture as Texture2D, copyTexture); */
+
+        //////////////////////////////////////////////////////
+
+        /* targetRenderer = raycastHit.transform.GetComponent<Renderer>();
+
+        Texture2D originalTexture = targetRenderer.material.GetTexture("_MainTex") as Texture2D;
+
+        if (originalTexture == null)
+    {
+        Debug.LogError("PAINT_GUN >>> Texture is null or not readable");
+        return;
+    }
+
+        copyTexture = new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, false);
+        copyTexture.SetPixels(originalTexture.GetPixels());
+        copyTexture.Apply(); */
+
+        ////////////////////////////////////////////////////////
+
+        /* targetRenderer = raycastHit.transform.GetComponent<Renderer>();
+
+        RenderTexture renderTexture = targetRenderer.material.mainTexture as RenderTexture;
+
+        if (renderTexture == null)
+        {
+            Debug.LogError("PAINT_GUN >>> Texture is not a RenderTexture");
+            return;
+        }
+
+        RenderTexture.active = renderTexture;
+        copyTexture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
+        copyTexture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+        copyTexture.Apply();
+        RenderTexture.active = null; */
+
+        ///////////////////////////////////////////////////////////
+
         targetRenderer = raycastHit.transform.GetComponent<Renderer>();
 
-        Texture originalTexture = targetRenderer.material.GetTexture("_MainTex");
+        Texture mainTexture = targetRenderer.material.mainTexture;
 
-        copyTexture = new Texture2D(originalTexture.width, originalTexture.height);
-        Graphics.CopyTexture(originalTexture as Texture2D, copyTexture);        
+        Debug.Log($"PAINT_GUN >>> Hit object: {raycastHit.transform.name}");
+
+        if (mainTexture == null)
+        {
+            mainTexture = targetRenderer.material.GetTexture("_BaseMap");
+        }
+
+        if (mainTexture == null)
+        {
+            Debug.LogError($"PAINT_GUN >>> No texture found");
+
+            return;
+        }
+
+        if (mainTexture is RenderTexture renderTexture)
+        {
+            RenderTexture.active = renderTexture;
+            copyTexture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
+            copyTexture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            copyTexture.Apply();
+            RenderTexture.active = null;
+        }
+        else if (mainTexture is Texture2D texture2D)
+        {
+            copyTexture = new Texture2D(texture2D.width, texture2D.height, texture2D.format, false);
+            copyTexture.SetPixels(texture2D.GetPixels());
+            copyTexture.Apply();
+        }
+        else
+        {
+            Debug.LogError($"PAINT_GUN >>> Unsupported texture type: {mainTexture.GetType().Name}");
+
+        }
     }
 
     private void ShootRaycast()
     {
-        float x = Screen.width / 2;
+        /* float x = Screen.width / 2;
         float y = Screen.height / 2;
         float z = 0;
         Vector3 raycastDirection = new Vector3(x, y, z);
-        Ray cameraRay = Camera.main.ScreenPointToRay(raycastDirection);
+        Ray cameraRay = Camera.main.ScreenPointToRay(raycastDirection); */
+
+        Vector3 origin = particles.transform.position;
+        Vector3 direction = particles.transform.forward;
+        Ray cameraRay = new Ray(origin, direction);
 
         if (!Physics.Raycast(cameraRay, out raycastHit, paintDistance))
         {
@@ -133,5 +222,6 @@ public class Paint : MonoBehaviour
     public void StopPainting()
     {
         particles.Stop();
+        continuePainting = false;
     }
 }
