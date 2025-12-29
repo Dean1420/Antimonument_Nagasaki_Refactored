@@ -70,49 +70,6 @@ public class Paint : MonoBehaviour
 
     private void CopyTexture()
     {
-        /*  targetRenderer = raycastHit.transform.GetComponent<Renderer>();
-
-         Texture originalTexture = targetRenderer.material.GetTexture("_MainTex");
-
-         copyTexture = new Texture2D(originalTexture.width, originalTexture.height);
-         Graphics.CopyTexture(originalTexture as Texture2D, copyTexture); */
-
-        //////////////////////////////////////////////////////
-
-        /* targetRenderer = raycastHit.transform.GetComponent<Renderer>();
-
-        Texture2D originalTexture = targetRenderer.material.GetTexture("_MainTex") as Texture2D;
-
-        if (originalTexture == null)
-    {
-        Debug.LogError("PAINT_GUN >>> Texture is null or not readable");
-        return;
-    }
-
-        copyTexture = new Texture2D(originalTexture.width, originalTexture.height, originalTexture.format, false);
-        copyTexture.SetPixels(originalTexture.GetPixels());
-        copyTexture.Apply(); */
-
-        ////////////////////////////////////////////////////////
-
-        /* targetRenderer = raycastHit.transform.GetComponent<Renderer>();
-
-        RenderTexture renderTexture = targetRenderer.material.mainTexture as RenderTexture;
-
-        if (renderTexture == null)
-        {
-            Debug.LogError("PAINT_GUN >>> Texture is not a RenderTexture");
-            return;
-        }
-
-        RenderTexture.active = renderTexture;
-        copyTexture = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
-        copyTexture.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
-        copyTexture.Apply();
-        RenderTexture.active = null; */
-
-        ///////////////////////////////////////////////////////////
-
         targetRenderer = raycastHit.transform.GetComponent<Renderer>();
 
         Texture mainTexture = targetRenderer.material.mainTexture;
@@ -154,12 +111,6 @@ public class Paint : MonoBehaviour
 
     private void ShootRaycast()
     {
-        /* float x = Screen.width / 2;
-        float y = Screen.height / 2;
-        float z = 0;
-        Vector3 raycastDirection = new Vector3(x, y, z);
-        Ray cameraRay = Camera.main.ScreenPointToRay(raycastDirection); */
-
         Vector3 origin = particles.transform.position;
         Vector3 direction = particles.transform.forward;
         Ray cameraRay = new Ray(origin, direction);
