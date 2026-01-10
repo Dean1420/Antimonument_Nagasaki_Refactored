@@ -133,7 +133,7 @@ public class PhotoHandler : MonoBehaviour
 
     void UploadPolaroid()
     {
-        LocalStorageOperations.Image.SaveTextureAsJpg(currentImage, "!_ProjectMain/Scripts/PolaroidCamera/", "test.jpg");
+        LocalStorageOperations.Image.SaveTextureAsJpg(currentImage, "!_ProjectMain/Scripts/PolaroidCamera/", "Test.jpg");
         
         // Commented out because the credentials are not updated yet
         /* byte[] currentImageJpg = currentImage.EncodeToJPG();
