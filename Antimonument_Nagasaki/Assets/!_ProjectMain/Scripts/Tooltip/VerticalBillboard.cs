@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class VerticalBillboard : MonoBehaviour
 {
     public Transform target;
