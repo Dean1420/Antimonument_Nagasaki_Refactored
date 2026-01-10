@@ -8,7 +8,8 @@ using LocalStorageOperations;
 using System.Collections.Generic;
 using System.IO;
 using System;
-
+using LocalStorageOperations;
+using NUnit.Framework.Internal;
 
 public class PhotoHandler : MonoBehaviour
 {
@@ -132,7 +133,10 @@ public class PhotoHandler : MonoBehaviour
 
     void UploadPolaroid()
     {
-        byte[] currentImageJpg = currentImage.EncodeToJPG();
+        LocalStorageOperations.Image.SaveTextureAsJpg(currentImage, "!_ProjectMain/Scripts/PolaroidCamera/", "test.jpg");
+        
+        // Commented out because the credentials are not updated yet
+        /* byte[] currentImageJpg = currentImage.EncodeToJPG();
         string fileType = ".jpg";
 
         Dictionary<string, string> credentials = LoadCredentials();
@@ -145,7 +149,7 @@ public class PhotoHandler : MonoBehaviour
             credentials["url"],
             credentials["remoteDirectory"],
             timestamp + filename + fileType,
-            currentImageJpg);
+            currentImageJpg); */
 
     }
 

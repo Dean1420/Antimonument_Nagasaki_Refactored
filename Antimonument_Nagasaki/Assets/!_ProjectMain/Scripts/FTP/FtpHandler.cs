@@ -8,8 +8,6 @@ using System.Net;
 using UnityEngine;
 using LocalStorageOperations;
 
-
-
 namespace Ftp
 {
     public static class FtpHandler
