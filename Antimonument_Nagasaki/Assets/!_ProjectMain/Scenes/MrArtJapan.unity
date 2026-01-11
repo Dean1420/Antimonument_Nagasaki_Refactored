@@ -7173,7 +7173,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 329673194906675678, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0001
+      value: 0.0203
       objectReference: {fileID: 0}
     - target: {fileID: 329673194906675678, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7181,7 +7181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 329673194906675678, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0242
+      value: -0.0811
       objectReference: {fileID: 0}
     - target: {fileID: 858909959850809415, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_text
@@ -7197,7 +7197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: -11.4872
+      value: -11.467
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[0].y
@@ -7205,11 +7205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[0].z
-      value: -3.5252
+      value: -3.5821
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: -11.5456
+      value: -11.445
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[1].y
@@ -7245,11 +7245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6109753184895857077, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Name
-      value: Trigger
+      value: Bumper
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0583
+      value: 0.0423
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7261,19 +7261,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8225169
+      value: 0.95211273
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.072043434
+      value: -0.19713902
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.56200755
+      value: 0.22885004
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.049225673
+      value: 0.047384385
       objectReference: {fileID: 0}
     - target: {fileID: 6282491594557355566, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_SizeDelta.x
@@ -18276,7 +18276,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 329673194906675678, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0017
+      value: -0.0219
       objectReference: {fileID: 0}
     - target: {fileID: 329673194906675678, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18284,7 +18284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 329673194906675678, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0237
+      value: -0.084
       objectReference: {fileID: 0}
     - target: {fileID: 858909959850809415, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_text
@@ -18300,7 +18300,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[0].x
-      value: -11.4198
+      value: -11.440001
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[0].y
@@ -18308,11 +18308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[0].z
-      value: -3.5247
+      value: -3.585
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[1].x
-      value: -11.364201
+      value: -11.4592
       objectReference: {fileID: 0}
     - target: {fileID: 3241181053437295646, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Positions.Array.data[1].y
@@ -18348,11 +18348,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6109753184895857077, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_Name
-      value: Trigger
+      value: Bumper
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.0539
+      value: -0.0411
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18364,19 +18364,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9083666
+      value: 0.935347
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.13737051
+      value: -0.16386455
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.39052725
+      value: 0.30878466
       objectReference: {fileID: 0}
     - target: {fileID: 6272577080240768824, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.059058677
+      value: 0.054096356
       objectReference: {fileID: 0}
     - target: {fileID: 6282491594557355566, guid: c189145280c0cf546982a27e5a400fb3, type: 3}
       propertyPath: m_SizeDelta.x
@@ -21409,6 +21409,7 @@ GameObject:
   - component: {fileID: 3847989641036437350}
   - component: {fileID: 3847989641036437351}
   - component: {fileID: 3847989641036437353}
+  - component: {fileID: 3847989641036437354}
   m_Layer: 0
   m_Name: Paint Gun
   m_TagString: Untagged
@@ -23068,10 +23069,34 @@ MonoBehaviour:
       m_Calls: []
   m_FirstSelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3847989641036437354}
+        m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
+        m_MethodName: replaceText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3847989641036437354}
+        m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
+        m_MethodName: resetTextToOriginal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -23093,9 +23118,9 @@ MonoBehaviour:
   m_Activated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3847989641036437353}
-        m_TargetAssemblyTypeName: Paint, Assembly-CSharp
-        m_MethodName: StartPainting
+      - m_Target: {fileID: 3847989641036437354}
+        m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
+        m_MethodName: replaceText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23108,9 +23133,9 @@ MonoBehaviour:
   m_Deactivated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3847989641036437353}
-        m_TargetAssemblyTypeName: Paint, Assembly-CSharp
-        m_MethodName: StopPainting
+      - m_Target: {fileID: 3847989641036437354}
+        m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
+        m_MethodName: resetTextToOriginal
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23215,6 +23240,20 @@ MonoBehaviour:
   radius: 50
   paintDistance: 10000
   particles: {fileID: 1600006135}
+--- !u!114 &3847989641036437354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685326736730309243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a815a2990d0689147b79ce30957f3425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeTooltip
+  replacementText: "Farbe spr\xFChen"
+  tooltip: {fileID: 928501027}
 --- !u!23 &4427028538545965126
 MeshRenderer:
   m_ObjectHideFlags: 0
