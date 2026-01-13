@@ -23072,7 +23072,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3847989641036437354}
         m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
-        m_MethodName: replaceText
+        m_MethodName: replace
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23087,7 +23087,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3847989641036437354}
         m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
-        m_MethodName: resetTextToOriginal
+        m_MethodName: reset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23118,9 +23118,9 @@ MonoBehaviour:
   m_Activated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3847989641036437354}
-        m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
-        m_MethodName: replaceText
+      - m_Target: {fileID: 3847989641036437353}
+        m_TargetAssemblyTypeName: Paint, Assembly-CSharp
+        m_MethodName: StartPainting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23133,9 +23133,9 @@ MonoBehaviour:
   m_Deactivated:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3847989641036437354}
-        m_TargetAssemblyTypeName: ChangeTooltip, Assembly-CSharp
-        m_MethodName: resetTextToOriginal
+      - m_Target: {fileID: 3847989641036437353}
+        m_TargetAssemblyTypeName: Paint, Assembly-CSharp
+        m_MethodName: StopPainting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23252,8 +23252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a815a2990d0689147b79ce30957f3425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChangeTooltip
-  replacementText: "Farbe spr\xFChen"
   tooltip: {fileID: 928501027}
+  replacementText: "Farbe spr\xFChen"
+  replacementState: 0
 --- !u!23 &4427028538545965126
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -4,26 +4,32 @@ using System.Runtime.CompilerServices;
 
 public class ChangeTooltip : MonoBehaviour
 {
-    [SerializeField] private string replacementText;
     [SerializeField] private Transform tooltip;
+    [SerializeField] private string replacementText;
+    [SerializeField] private bool replacementState;
+
     private string originalText;
+    private bool originalState;
     private TextMeshProUGUI tooltipTextMesh;
 
     void Start()
     {
         tooltipTextMesh = tooltip.GetComponentInChildren<TextMeshProUGUI>();
         originalText = tooltipTextMesh.text;
+        originalState = tooltip.gameObject.activeSelf;
     }
 
-    public void replaceText()
+    public void replace()
     {
         tooltipTextMesh.text = replacementText;
+        tooltip.gameObject.SetActive(replacementState);
         Debug.Log("TOOLTIP >>> " + originalText + "changed to " + replacementText);
     }
 
-    public void resetTextToOriginal()
+    public void reset()
     {
         tooltipTextMesh.text = originalText;
+        tooltip.gameObject.SetActive(originalState);
         Debug.Log("TOOLTIP >>> " + replacementText + " changed to " + originalText);
     }
 }
