@@ -1,15 +1,21 @@
-/* using System;
-using System.Runtime.CompilerServices;
-using NUnit.Framework.Constraints; */
 using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine.Rendering;
+
+
 
 public class Paint : MonoBehaviour
-{
+{   // data required upfront in editor
     public Color color;
     public float radius = 10;
     public float paintDistance = 100;
     public ParticleSystem particles;
+    public Transform[] paintableObjects;
 
+    // caching of copied textures for resets and efficiency
+    private Dictionary<GameObject, Texture2D> cachedTextures = new Dictionary<GameObject, Texture2D>();
+
+    // data acquired while runtime for painting
     private Vector2 pixelUV;
     private Texture2D copyTexture;
     private Renderer targetRenderer;
@@ -19,7 +25,8 @@ public class Paint : MonoBehaviour
 
     void Start()
     {
-    particles.Stop();
+        particles.Stop();
+        //CacheOriginalTextures();
     }
 
     void Update()
@@ -30,10 +37,43 @@ public class Paint : MonoBehaviour
         }
     }
 
+
+
+    private void CacheOriginalTextures()
+    {
+        foreach (Transform paintable in paintableObjects)
+        {
+            GameObject paintableObject = paintable.gameObject;
+            targetRenderer = paintable.GetComponent<Renderer>();
+            Texture mainTexture = targetRenderer.material.mainTexture;
+
+            if (mainTexture == null)
+            {
+                copyTexture = null;
+                Debug.LogError($"PAINT_GUN >>> No texture found on {paintable.name}");
+                cachedTextures.Add(paintableObject, null); // Add null to cache if you want
+                continue;
+            }
+
+            else
+            {
+                copyTexture = null;
+                Debug.LogError($"PAINT_GUN >>> Unsupported texture type: {mainTexture.GetType().Name}");
+            }
+
+            cachedTextures.Add(paintableObject, copyTexture);
+            Debug.Log($"PAINT_GUN >>> Cache Texture of object: {paintableObject.name}");
+        }
+    }
+
+
+
     public void TogglePaintPointer()
     {
 
     }
+
+
 
     public void StartPainting()
     {
@@ -46,15 +86,21 @@ public class Paint : MonoBehaviour
     {
         ShootRaycast();
 
-        if (!CheckIfPaintable())
+        if (isPaintable())
         {
+            ApplyPaint();
         }
-        ApplyPaint();
     }
 
     private void ApplyPaint()
     {
-        CopyTexture();
+        GetTextureCopy();
+
+        if (copyTexture == null)
+        {
+            Debug.Log($"PAINT_GUN >>> no texture found for: {raycastHit.transform.name}");
+            return;
+        }
 
         pixelUV = raycastHit.textureCoord;
         pixelUV.x *= copyTexture.width;
@@ -63,15 +109,24 @@ public class Paint : MonoBehaviour
 
         PaintCircleOnTexture(pixelUV.x, pixelUV.y, radius, color);
 
-        // Apply the changes and update the material
+        // apply the changes and update the material
         copyTexture.Apply();
         targetRenderer.material.SetTexture("_MainTex", copyTexture);
     }
 
-    private void CopyTexture()
+    private void GetTextureCopy()
     {
         targetRenderer = raycastHit.transform.GetComponent<Renderer>();
 
+        // check if texture copy already cached 
+        GameObject hitObject = raycastHit.transform.gameObject;
+        if (cachedTextures.ContainsKey(hitObject))
+        {
+            copyTexture = cachedTextures[hitObject];
+            return;
+        }
+
+        // copy and cache texture
         Texture mainTexture = targetRenderer.material.mainTexture;
 
         Debug.Log($"PAINT_GUN >>> Hit object: {raycastHit.transform.name}");
@@ -84,7 +139,7 @@ public class Paint : MonoBehaviour
         if (mainTexture == null)
         {
             Debug.LogError($"PAINT_GUN >>> No texture found");
-
+            copyTexture = null;
             return;
         }
 
@@ -107,6 +162,9 @@ public class Paint : MonoBehaviour
             Debug.LogError($"PAINT_GUN >>> Unsupported texture type: {mainTexture.GetType().Name}");
 
         }
+
+        cachedTextures.Add(hitObject, copyTexture);
+        Debug.Log($"PAINT_GUN >>> Cache Texture of object: {hitObject.name}");
     }
 
     private void ShootRaycast()
@@ -132,14 +190,28 @@ public class Paint : MonoBehaviour
     }
 
 
-    private bool CheckIfPaintable()
+    private bool isPaintable()
     {
-        if (raycastHit.collider.gameObject.name == "Ground")
+        if (raycastHit.collider == null)
         {
             return false;
         }
 
-        return true;
+        GameObject hitObject = raycastHit.collider.gameObject;
+        if (hitObject == null)
+        {
+            return false;
+        }
+
+        foreach (Transform paintableObject in paintableObjects)
+        {
+            if (paintableObject.gameObject == hitObject)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

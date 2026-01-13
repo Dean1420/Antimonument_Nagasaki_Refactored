@@ -23240,6 +23240,25 @@ MonoBehaviour:
   radius: 50
   paintDistance: 10000
   particles: {fileID: 1600006135}
+  paintableObjects:
+  - {fileID: 1160520107018200016}
+  - {fileID: 6787947596220204561}
+  - {fileID: 2715034}
+  - {fileID: 6678747169548218748}
+  - {fileID: 1928711618571631001}
+  - {fileID: 6931615814734435270}
+  - {fileID: 8436460242548728711}
+  - {fileID: 1446298096237217476}
+  - {fileID: 7876850347420816083}
+  - {fileID: 850011484}
+  - {fileID: 1651111259}
+  - {fileID: 1691843496}
+  - {fileID: 315784348}
+  - {fileID: 1715011721}
+  - {fileID: 421558453}
+  - {fileID: 1012771272}
+  - {fileID: 1202429562}
+  - {fileID: 7876850347420816083}
 --- !u!114 &3847989641036437354
 MonoBehaviour:
   m_ObjectHideFlags: 0
