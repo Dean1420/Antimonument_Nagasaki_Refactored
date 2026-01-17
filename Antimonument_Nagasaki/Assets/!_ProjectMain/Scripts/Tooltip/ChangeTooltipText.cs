@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Runtime.CompilerServices;
 
-public class ChangeTooltip : MonoBehaviour
+public class ChangeTooltipText : MonoBehaviour
 {
     [SerializeField] private Transform tooltip;
     [SerializeField] private string replacementText;
