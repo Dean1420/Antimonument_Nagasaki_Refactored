@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEngine.Rendering;
 
 
 
@@ -11,6 +10,7 @@ public class Paint : MonoBehaviour
     public float paintDistance = 100;
     public ParticleSystem particles;
     public Transform[] paintableObjects;
+    public Transform colourpicker;
 
     // caching of copied textures for resets and efficiency
     private Dictionary<GameObject, Texture2D> cachedTextures = new Dictionary<GameObject, Texture2D>();
@@ -54,6 +54,32 @@ public class Paint : MonoBehaviour
         {
             ApplyPaint();
         }
+        else if (raycastHit.collider.gameObject.name == colourpicker.name)
+        {
+            ChangePaintColour();
+        }
+    }
+
+    private void ChangePaintColour()
+    {
+        Renderer renderer = raycastHit.collider.GetComponent<Renderer>();
+        if (renderer != null && renderer.material.mainTexture != null)
+        {
+            Texture2D texture = renderer.material.mainTexture as Texture2D;
+
+            Vector2 pixelUV = raycastHit.textureCoord;
+
+            int x = (int)(pixelUV.x * texture.width);
+            int y = (int)(pixelUV.y * texture.height);
+
+            color = texture.GetPixel(x, y);
+
+            Debug.Log($"Paint_Gun >>> colour changed to {color} at ({x}, {y})");
+
+            ParticleSystem.MainModule main = particles.main;
+            main.startColor = color;
+        }
+
     }
 
     private void ApplyPaint()
