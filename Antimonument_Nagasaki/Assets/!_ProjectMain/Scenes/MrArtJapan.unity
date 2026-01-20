@@ -3589,6 +3589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536850385}
+  - component: {fileID: 536850386}
   m_Layer: 0
   m_Name: Trees
   m_TagString: Untagged
@@ -3641,6 +3642,27 @@ Transform:
   - {fileID: 657403359}
   m_Father: {fileID: 2063251646}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &536850386
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536850384}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -8.42, y: 6.76, z: 0.92}
 --- !u!1001 &546381880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6594,7 +6616,7 @@ GameObject:
   - component: {fileID: 884723114}
   - component: {fileID: 884723113}
   - component: {fileID: 884723112}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GLB Export Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21491,6 +21513,39 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4960240909583277935, guid: 3ef8f7cf1fe5d4441b44e63936a1f7b5, type: 3}
   m_PrefabInstance: {fileID: 1854814765}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1864957921
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1864957922}
+  m_Layer: 0
+  m_Name: Painting
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1864957922
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1864957921}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 200715459548616897}
+  - {fileID: 1900911802156357717}
+  m_Father: {fileID: 1138836215146793517}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1903241651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23144,6 +23199,14 @@ MonoBehaviour:
   grabAudioSource: {fileID: 0}
   backgroundAudioSource: {fileID: 0}
   explainAudioSource: {fileID: 0}
+  stickerCount: 0
+  grabStatueCount: 0
+  putStatueDownCount: 0
+  statueDebrisImpactCount: 0
+  swordCutCount: 0
+  typewriterCount: 0
+  uiSelectCount: 0
+  grabCount: 0
 --- !u!4 &2096432242
 Transform:
   m_ObjectHideFlags: 0
@@ -23377,14 +23440,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 685326736730309243}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.026385158, y: 0.70661455, z: 0.0104532465, w: -0.7070293}
-  m_LocalPosition: {x: 0.334, y: 0.095, z: 0.268}
-  m_LocalScale: {x: 0.1, y: 0.07656411, z: 0.076564156}
+  m_LocalRotation: {x: -0.02638516, y: 0.7066146, z: 0.01045327, w: -0.7070293}
+  m_LocalPosition: {x: 0.3340001, y: 0.09500004, z: 0.26799995}
+  m_LocalScale: {x: 0.09999999, y: 0.07656411, z: 0.07656415}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1600006133}
   - {fileID: 1265674510}
-  m_Father: {fileID: 1138836215146793517}
+  m_Father: {fileID: 1864957922}
   m_LocalEulerAnglesHint: {x: 0, y: 58.08, z: 87.014}
 --- !u!33 &273736072712391019
 MeshFilter:
@@ -23515,6 +23578,7 @@ GameObject:
   - component: {fileID: 3847989641036437353}
   - component: {fileID: 3847989641036437354}
   - component: {fileID: 3847989641036437355}
+  - component: {fileID: 3847989641036437356}
   m_Layer: 0
   m_Name: Paint Gun
   m_TagString: Untagged
@@ -24102,7 +24166,7 @@ Transform:
   m_LocalScale: {x: 2.8761525, y: 2.8761537, z: 2.8761523}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 200715459548616897}
+  - {fileID: 1864957922}
   - {fileID: 620478728}
   m_Father: {fileID: 1495255363226450522}
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 110.835}
@@ -24458,7 +24522,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1900911802156357717}
   - {fileID: 832658047606195701}
   - {fileID: 2142073900}
   m_Father: {fileID: 0}
@@ -24614,12 +24677,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1900911802156357719}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalRotation: {x: -0.40134946, y: 0.5821679, z: 0.5821659, w: -0.40135017}
+  m_LocalPosition: {x: -2.7472513, y: -3.8386168, z: -3.4761233}
+  m_LocalScale: {x: 0.104305975, y: 0.10430603, z: 0.10430599}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1900911800441585229}
+  m_Father: {fileID: 1864957922}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1900911802156357718
 SpriteRenderer:
@@ -25187,12 +25250,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3847989641036437356}
+        m_TargetAssemblyTypeName: PaintgunPointer, Assembly-CSharp
+        m_MethodName: TogglePointer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 3847989641036437355}
         m_TargetAssemblyTypeName: ChangeTooltipIcon, Assembly-CSharp
         m_MethodName: reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3847989641036437356}
+        m_TargetAssemblyTypeName: PaintgunPointer, Assembly-CSharp
+        m_MethodName: TogglePointer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25394,6 +25481,21 @@ MonoBehaviour:
   tooltip: {fileID: 1013635772}
   replacementSprite: {fileID: 21300000, guid: ba852c6464a8f764185bb4ba06fdfdf2, type: 3}
   replacementState: 1
+--- !u!114 &3847989641036437356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685326736730309243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da4f77ddbc940c4fb01de2710c759fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PaintgunPointer
+  pointer: {fileID: 1900911802156357717}
+  pointerDirection: {fileID: 1600006133}
+  maxDistance: 1000
 --- !u!23 &4427028538545965126
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -26,7 +26,6 @@ public class Paint : MonoBehaviour
     void Start()
     {
         particles.Stop();
-        //CacheOriginalTextures();
     }
 
     void Update()
@@ -35,41 +34,6 @@ public class Paint : MonoBehaviour
         {
             PaintOnRenderTexture();
         }
-    }
-
-
-
-    private void CacheOriginalTextures()
-    {
-        foreach (Transform paintable in paintableObjects)
-        {
-            GameObject paintableObject = paintable.gameObject;
-            targetRenderer = paintable.GetComponent<Renderer>();
-            Texture mainTexture = targetRenderer.material.mainTexture;
-
-            if (mainTexture == null)
-            {
-                copyTexture = null;
-                Debug.LogError($"PAINT_GUN >>> No texture found on {paintable.name}");
-                cachedTextures.Add(paintableObject, null); // Add null to cache if you want
-                continue;
-            }
-
-            else
-            {
-                copyTexture = null;
-                Debug.LogError($"PAINT_GUN >>> Unsupported texture type: {mainTexture.GetType().Name}");
-            }
-
-            cachedTextures.Add(paintableObject, copyTexture);
-            Debug.Log($"PAINT_GUN >>> Cache Texture of object: {paintableObject.name}");
-        }
-    }
-
-
-
-    public void TogglePaintPointer()
-    {
 
     }
 
