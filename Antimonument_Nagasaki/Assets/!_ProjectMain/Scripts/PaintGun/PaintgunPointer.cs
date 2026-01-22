@@ -35,10 +35,15 @@ public class PaintgunPointer : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, maxDistance))
         {
             AdjustPointerSize(hit);
-            Vector3 offset = hit.normal * 0.01f;
-            pointer.position = hit.point + offset;
-            pointer.rotation = Quaternion.LookRotation(hit.normal);
+            MovePointer(hit);
         }
+    }
+
+    private void MovePointer(RaycastHit hit)
+    {
+        Vector3 offset = hit.normal * 0.01f;
+        pointer.position = hit.point + offset;
+        pointer.rotation = Quaternion.LookRotation(hit.normal);
     }
 
     private void AdjustPointerSize(RaycastHit hit)

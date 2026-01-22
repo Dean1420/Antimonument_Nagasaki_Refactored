@@ -23692,6 +23692,7 @@ GameObject:
   - component: {fileID: 3847989641036437353}
   - component: {fileID: 3847989641036437354}
   - component: {fileID: 3847989641036437355}
+  - component: {fileID: 3847989641036437357}
   - component: {fileID: 3847989641036437356}
   m_Layer: 0
   m_Name: Paint Gun
@@ -25376,6 +25377,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3847989641036437357}
+        m_TargetAssemblyTypeName: ChangeTooltipIconRaycast, Assembly-CSharp
+        m_MethodName: ToggleRaycast
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_LastSelectExited:
     m_PersistentCalls:
       m_Calls:
@@ -25394,6 +25407,18 @@ MonoBehaviour:
       - m_Target: {fileID: 3847989641036437356}
         m_TargetAssemblyTypeName: PaintgunPointer, Assembly-CSharp
         m_MethodName: TogglePointer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3847989641036437357}
+        m_TargetAssemblyTypeName: ChangeTooltipIconRaycast, Assembly-CSharp
+        m_MethodName: ToggleRaycast
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -25615,6 +25640,25 @@ MonoBehaviour:
   minimizedPointerSize: 0.1
   minimizePointerForObjects:
   - {fileID: 1285765303}
+--- !u!114 &3847989641036437357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 685326736730309243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4652b61fcf61da443ba626eba21dd51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeTooltipIconRaycast
+  tooltip: {fileID: 1013635772}
+  replacementSprite: {fileID: 21300000, guid: 3c23899d4373e4041bcd303e20908146, type: 3}
+  replacementState: 1
+  targetObjects:
+  - {fileID: 1285765303}
+  rayDirection: {fileID: 1600006133}
+  maxDistance: 100
 --- !u!23 &4427028538545965126
 MeshRenderer:
   m_ObjectHideFlags: 0
