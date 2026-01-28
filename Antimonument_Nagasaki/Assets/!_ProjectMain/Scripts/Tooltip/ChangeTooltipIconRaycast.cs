@@ -88,14 +88,14 @@ public class ChangeTooltipIconRaycast : MonoBehaviour
     {
         tooltipImage.sprite = replacementSprite;
         tooltip.gameObject.SetActive(replacementState);
-        Debug.Log("TOOLTIP >>> " + originalSprite.name + " changed to " + replacementSprite.name);
+        // Debug.Log("TOOLTIP >>> " + originalSprite.name + " changed to " + replacementSprite.name);
     }
 
     public void Reset()
     {
         tooltipImage.sprite = originalSprite;
         tooltip.gameObject.SetActive(originalState);
-        Debug.Log("TOOLTIP >>> " + replacementSprite.name + " changed to " + originalSprite.name);
+        //  Debug.Log("TOOLTIP >>> " + replacementSprite.name + " changed to " + originalSprite.name);
     }
 
     public void ToggleRaycast()
