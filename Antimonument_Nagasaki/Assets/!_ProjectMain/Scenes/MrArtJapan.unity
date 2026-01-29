@@ -6014,7 +6014,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &747557472
 Transform:
   m_ObjectHideFlags: 0
@@ -6062,6 +6062,8 @@ MonoBehaviour:
     positionScaleX: 12
     positionScaleY: 12
     positionScaleZ: 20
+  rightTriggerAction: {fileID: 0}
+  controllerModel: {fileID: 0}
 --- !u!54 &747557475
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7591,6 +7593,8 @@ GameObject:
   - component: {fileID: 923023046}
   - component: {fileID: 923023049}
   - component: {fileID: 923023048}
+  - component: {fileID: 923023050}
+  - component: {fileID: 923023051}
   m_Layer: 2
   m_Name: Platform
   m_TagString: Untagged
@@ -7671,6 +7675,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 923023045}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!136 &923023050
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923023045}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.51
+  m_Height: 634.21
+  m_Direction: 1
+  m_Center: {x: 0.00000029802322, y: 168.1, z: -0.00000008940697}
+--- !u!114 &923023051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923023045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b26651a7a841594d87d025a78f7529c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IKTargetFollowVRRig
+  leftHand:
+    vrTarget: {fileID: 1337998119}
+    ikTarget: {fileID: 254266299}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+    playerCenter: {fileID: 245504995}
+    statueCenter: {fileID: 1044404744}
+    positionScaleX: 12
+    positionScaleY: 12
+    positionScaleZ: 20
+  rightHand:
+    vrTarget: {fileID: 1300359175}
+    ikTarget: {fileID: 972131835}
+    trackingPositionOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+    playerCenter: {fileID: 245504995}
+    statueCenter: {fileID: 1044404744}
+    positionScaleX: 12
+    positionScaleY: 12
+    positionScaleZ: 20
+  rightTriggerAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  controllerModel: {fileID: 1536450594}
 --- !u!1 &926597565
 GameObject:
   m_ObjectHideFlags: 0
@@ -12034,6 +12095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1300359175}
+  - component: {fileID: 1300359176}
   m_Layer: 0
   m_Name: IK VR Target Right
   m_TagString: Untagged
@@ -12056,6 +12118,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 248018233}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1300359176
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300359174}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.04
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1304385934
 GameObject:
   m_ObjectHideFlags: 0

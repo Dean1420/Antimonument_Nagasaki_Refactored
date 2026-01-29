@@ -1,5 +1,7 @@
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem; // ADDED
+
 
 [System.Serializable]
 public class VRMap
@@ -17,42 +19,18 @@ public class VRMap
 
     public void Map()
     {
-        /* Vector3 localPos = vrTarget.TransformPoint(trackingPositionOffset);
-
-        // Scale the position relative to IK target's parent
-        Vector3 scaledPos = ikTarget.parent.position +
-            (localPos - ikTarget.parent.position) * positionScale;
-
-        ikTarget.position = scaledPos;
-        ikTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset); */
-
-
-
-        /*  Vector3 localPos = vrTarget.TransformPoint(trackingPositionOffset);
-
-         // Get offset from player center
-         Vector3 offsetFromPlayer = localPos - playerCenter.position;
-
-         // Flip the Z axis (front/back)
-         offsetFromPlayer.z *= -1;
-
-         // Scale and apply to statue center
-         ikTarget.position = statueCenter.position + (offsetFromPlayer * positionScale);
-         ikTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset); */
-
-
         Vector3 localPos = vrTarget.TransformPoint(trackingPositionOffset);
-        
+
         // Get offset from player center
         Vector3 offsetFromPlayer = localPos - playerCenter.position;
-        
+
         // Scale per axis
         offsetFromPlayer.x *= positionScaleX;
         offsetFromPlayer.y *= positionScaleY;
         offsetFromPlayer.z *= -positionScaleZ;
-        
+
         ikTarget.position = statueCenter.position + offsetFromPlayer;
-        
+
         // Flip rotation 180 degrees around Y axis
         ikTarget.rotation = Quaternion.Euler(0, 180, 0) * vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
     }
@@ -62,10 +40,32 @@ public class IKTargetFollowVRRig : MonoBehaviour
 {
     public VRMap leftHand;
     public VRMap rightHand;
-    
-    public void Update()
+    public InputActionReference rightTriggerAction; // ADDED
+    public Transform controllerModel; // ADDED - Drag controller here
+
+
+    // ADDED
+    void OnTriggerEnter(Collider other)
     {
-        //UpdatePostion();
+        if (other.transform == controllerModel)
+        {
+            rightTriggerAction.action.performed += OnTriggerPressed;
+        }
+    }
+
+    // ADDED
+    void OnTriggerExit(Collider other)
+    {
+        if (other.transform == controllerModel)
+        {
+            rightTriggerAction.action.performed -= OnTriggerPressed;
+        }
+    }
+
+    // ADDED
+    private void OnTriggerPressed(InputAction.CallbackContext context)
+    {
+        UpdatePostion();
     }
 
     public void UpdatePostion()
