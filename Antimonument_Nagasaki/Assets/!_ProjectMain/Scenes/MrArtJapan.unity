@@ -7595,6 +7595,7 @@ GameObject:
   - component: {fileID: 923023048}
   - component: {fileID: 923023050}
   - component: {fileID: 923023051}
+  - component: {fileID: 923023052}
   m_Layer: 2
   m_Name: Platform
   m_TagString: Untagged
@@ -7732,6 +7733,21 @@ MonoBehaviour:
     positionScaleZ: 20
   rightTriggerAction: {fileID: 83097790271614945, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   controllerModel: {fileID: 1536450594}
+--- !u!114 &923023052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 923023045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49eaabf21eb55314587dedbee99ac329, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeTooltipOnCollide
+  tooltip: {fileID: 1013635772}
+  replacementSprite: {fileID: 21300000, guid: f6392ed6e24692840accd47513705cc7, type: 3}
+  replacementState: 1
 --- !u!1 &926597565
 GameObject:
   m_ObjectHideFlags: 0
