@@ -1,20 +1,29 @@
+using System.Collections; // -----Change here
 using UnityEngine;
 using UnityGLTF;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System.Collections.Generic;
-using LocalStorageOperations;
-
-public class ExportFromArea : MonoBehaviour
+public class ExcportFromAreaAsync : MonoBehaviour
 {
+
+
+
     [SerializeField] private Transform boundingBox;
 
     public void Export()
     {
+        StartCoroutine(ExportCoroutine());
+    }
+
+    private IEnumerator ExportCoroutine()
+    {
+        yield return null;
+
         if (boundingBox == null)
         {
             Debug.LogError("GLB >>> Bounding box not assigned!");
-            return;
+            yield break;
         }
 
         Vector3 halfExtents = boundingBox.lossyScale * 0.5f;
@@ -40,7 +49,7 @@ public class ExportFromArea : MonoBehaviour
         if (objectsInBox.Count == 0)
         {
             Debug.LogWarning("GLB >>> No objects found in bounding box!");
-            return;
+            yield break;
         }
 
         // Create temporary parent
@@ -57,8 +66,13 @@ public class ExportFromArea : MonoBehaviour
         string relativePath = "!_ProjectMain/Scripts/GLB/ExportedGLB";
         string fullPath = Path.Combine(Application.dataPath, relativePath);
 
-        GLTFSceneExporter exporter = new GLTFSceneExporter(new Transform[] { tempRoot.transform }, new ExportContext());
-        exporter.SaveGLB(fullPath, "export_area");
+       //Run export on background thread
+        yield return new WaitForEndOfFrame();
+        System.Threading.Tasks.Task.Run(() =>
+        {
+            GLTFSceneExporter exporter = new GLTFSceneExporter(new Transform[] { tempRoot.transform }, new ExportContext());
+            exporter.SaveGLB(fullPath, "export_area");
+        }).Wait();
 
         // Restore original parents
         for (int i = 0; i < objectsInBox.Count; i++)
@@ -71,51 +85,4 @@ public class ExportFromArea : MonoBehaviour
         Debug.Log("GLB >>> Exported to: " + fullPath + "/export_area.glb");
     }
 
-
-
-    void UploadScene()
-    {
-        // define the path to the exported GLB file
-        string relativePath = "!_ProjectMain/Scripts/GLB/ExportedGLB";
-        string fullPath = Path.Combine(Application.dataPath, relativePath);
-        string glbFilePath = Path.Combine(fullPath, "export_area.glb");
-
-        // changed - Check if the file exists
-        if (!File.Exists(glbFilePath))
-        {
-            Debug.LogError("GLB >>> Export file not found at: " + glbFilePath);
-            return;
-        }
-
-        // read the GLB file as byte stream
-        byte[] glbBytes = File.ReadAllBytes(glbFilePath);
-        string fileType = ".glb";
-
-        Dictionary<string, string> credentials = LoadCredentials();
-
-        string timestamp = System.DateTime.Now.ToString("yyyy.MM.dd_HH.mm");
-        string filename = "scene_export_";
-
-        Ftp.FtpHandler.uploadFile(
-            credentials["username"],
-            credentials["password"],
-            credentials["url"],
-            credentials["remoteDirectory"],
-            timestamp + filename + fileType,
-            glbBytes); // #changed - was currentImageJpg
-
-        // #changed - Added logging
-        Debug.Log("GLB >>> Uploaded to FTP: " + timestamp + filename + fileType);
-
-    }
-
-
-
-    private Dictionary<string, string> LoadCredentials()
-    {
-        string pathToCredentials = "!_ProjectMain/Scripts/PolaroidCamera/credentials.txt";
-        string separator = ":";
-        return TextFile.LoadLinesByKeyValue(pathToCredentials, separator);
-    }
 }
-

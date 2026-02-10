@@ -6,10 +6,7 @@ using System.Collections;
 using Ftp;
 using LocalStorageOperations;
 using System.Collections.Generic;
-using System.IO;
 using System;
-using LocalStorageOperations;
-using NUnit.Framework.Internal;
 
 public class PhotoHandler : MonoBehaviour
 {
@@ -133,10 +130,9 @@ public class PhotoHandler : MonoBehaviour
 
     void UploadPolaroid()
     {
-        LocalStorageOperations.Image.SaveTextureAsJpg(currentImage, "!_ProjectMain/Scripts/PolaroidCamera/", "Test.jpg");
+        LocalStorageOperations.Image.SaveTextureAsJpg(currentImage, "!_ProjectMain/Scripts/PolaroidCamera/Images/", "Test.jpg");
         
-        // Commented out because the credentials are not updated yet
-        /* byte[] currentImageJpg = currentImage.EncodeToJPG();
+        byte[] currentImageJpg = currentImage.EncodeToJPG();
         string fileType = ".jpg";
 
         Dictionary<string, string> credentials = LoadCredentials();
@@ -145,11 +141,11 @@ public class PhotoHandler : MonoBehaviour
         string filename = "file_";
         Ftp.FtpHandler.uploadFile(
             credentials["username"],
-            credentials["username"],
+            credentials["password"],
             credentials["url"],
             credentials["remoteDirectory"],
             timestamp + filename + fileType,
-            currentImageJpg); */
+            currentImageJpg);
 
     }
 
