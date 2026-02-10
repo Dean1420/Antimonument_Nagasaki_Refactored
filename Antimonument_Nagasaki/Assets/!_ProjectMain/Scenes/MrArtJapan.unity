@@ -7712,20 +7712,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IKTargetFollowVRRig
   leftHand:
-    vrTarget: {fileID: 1337998119}
+    vrTarget: {fileID: 1300359175}
     ikTarget: {fileID: 254266299}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: 90, y: 0, z: 0}
     playerCenter: {fileID: 245504995}
     statueCenter: {fileID: 1044404744}
     positionScaleX: 12
     positionScaleY: 12
     positionScaleZ: 20
   rightHand:
-    vrTarget: {fileID: 1300359175}
+    vrTarget: {fileID: 1337998119}
     ikTarget: {fileID: 972131835}
     trackingPositionOffset: {x: 0, y: 0, z: 0}
-    trackingRotationOffset: {x: 0, y: 0, z: 0}
+    trackingRotationOffset: {x: -90, y: 180, z: 0}
     playerCenter: {fileID: 245504995}
     statueCenter: {fileID: 1044404744}
     positionScaleX: 12

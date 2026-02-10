@@ -32,7 +32,10 @@ public class VRMap
         ikTarget.position = statueCenter.position + offsetFromPlayer;
 
         // Flip rotation 180 degrees around Y axis
-        ikTarget.rotation = Quaternion.Euler(0, 180, 0) * vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        Quaternion baseRotation = Quaternion.Euler(0, 180, 0) * vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+        Vector3 euler = baseRotation.eulerAngles;
+        euler.y = -euler.y; // Negate Y-axis rotation
+        ikTarget.rotation = Quaternion.Euler(euler);
     }
 }
 
@@ -40,8 +43,10 @@ public class IKTargetFollowVRRig : MonoBehaviour
 {
     public VRMap leftHand;
     public VRMap rightHand;
-    public InputActionReference rightTriggerAction; // ADDED
-    public Transform controllerModel; // ADDED - Drag controller here
+    public InputActionReference rightTriggerAction;
+    public Transform controllerModel; // drag controller here
+    private bool isTriggerHeld = false;
+
 
 
     // ADDED
@@ -49,7 +54,8 @@ public class IKTargetFollowVRRig : MonoBehaviour
     {
         if (other.transform == controllerModel)
         {
-            rightTriggerAction.action.performed += OnTriggerPressed;
+            rightTriggerAction.action.started += OnTriggerStarted;
+            rightTriggerAction.action.canceled += OnTriggerCanceled;
         }
     }
 
@@ -58,14 +64,30 @@ public class IKTargetFollowVRRig : MonoBehaviour
     {
         if (other.transform == controllerModel)
         {
-            rightTriggerAction.action.performed -= OnTriggerPressed;
+            rightTriggerAction.action.started -= OnTriggerStarted;
+            rightTriggerAction.action.canceled -= OnTriggerCanceled;
+            isTriggerHeld = false;
         }
     }
 
-    // ADDED
-    private void OnTriggerPressed(InputAction.CallbackContext context)
+    private void OnTriggerStarted(InputAction.CallbackContext context)
     {
-        UpdatePostion();
+        isTriggerHeld = true;
+    }
+
+    // added to detect release
+    private void OnTriggerCanceled(InputAction.CallbackContext context)
+    {
+        isTriggerHeld = false;
+    }
+
+    // update to continuously call while held
+    void Update()
+    {
+        if (isTriggerHeld)
+        {
+            UpdatePostion();
+        }
     }
 
     public void UpdatePostion()
