@@ -46,7 +46,7 @@ public class PhotoHandler : MonoBehaviour
         StartCoroutine(SpawnPolaroid());
         Debug.Log("POLAROID >>> successfully rendered and spawned");
 
-        UploadPolaroid();
+        //UploadPolaroid();
         Debug.Log($"POLAROID >>> successfully uploaded");
 
     }

@@ -8,6 +8,7 @@ using LocalStorageOperations;
 public class ExportFromArea : MonoBehaviour
 {
     [SerializeField] private Transform boundingBox;
+    [SerializeField] private Transform[] ignoredObjects;
 
     public void Export()
     {
@@ -30,7 +31,18 @@ public class ExportFromArea : MonoBehaviour
 
         foreach (Collider col in hitColliders)
         {
-            if (col.transform != boundingBox)
+            if (col.transform == boundingBox) continue;
+
+            bool isIgnored = System.Array.Exists(ignoredObjects, ignored => ignored == col.transform);
+            if (isIgnored) continue;
+
+            // Check if the object's actual position is inside the box
+            Vector3 localPos = boundingBox.InverseTransformPoint(col.transform.position);
+            bool isInsideBox = Mathf.Abs(localPos.x) <= 0.5f &&
+                               Mathf.Abs(localPos.y) <= 0.5f &&
+                               Mathf.Abs(localPos.z) <= 0.5f;
+
+            if (isInsideBox)
             {
                 objectsInBox.Add(col.transform);
                 originalParents.Add(col.transform.parent);
@@ -75,19 +87,16 @@ public class ExportFromArea : MonoBehaviour
 
     void UploadScene()
     {
-        // define the path to the exported GLB file
         string relativePath = "!_ProjectMain/Scripts/GLB/ExportedGLB";
         string fullPath = Path.Combine(Application.dataPath, relativePath);
         string glbFilePath = Path.Combine(fullPath, "export_area.glb");
 
-        // changed - Check if the file exists
         if (!File.Exists(glbFilePath))
         {
             Debug.LogError("GLB >>> Export file not found at: " + glbFilePath);
             return;
         }
 
-        // read the GLB file as byte stream
         byte[] glbBytes = File.ReadAllBytes(glbFilePath);
         string fileType = ".glb";
 
@@ -102,11 +111,9 @@ public class ExportFromArea : MonoBehaviour
             credentials["url"],
             credentials["remoteDirectory"],
             timestamp + filename + fileType,
-            glbBytes); // #changed - was currentImageJpg
+            glbBytes);
 
-        // #changed - Added logging
         Debug.Log("GLB >>> Uploaded to FTP: " + timestamp + filename + fileType);
-
     }
 
 
@@ -118,4 +125,3 @@ public class ExportFromArea : MonoBehaviour
         return TextFile.LoadLinesByKeyValue(pathToCredentials, separator);
     }
 }
-

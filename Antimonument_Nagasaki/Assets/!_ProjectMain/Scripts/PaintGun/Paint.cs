@@ -5,16 +5,27 @@ using System.Collections.Generic;
 
 public class Paint : MonoBehaviour
 {   // data required upfront in editor
-    public Color color;
-    public float radius = 10;
-    public float paintDistance = 100;
-    public ParticleSystem particles;
-    public Transform[] paintableObjects;
-    public Transform colourpicker;
+    [Header("Paint Properties")]
+    [SerializeField] private Color color;
+    [SerializeField] private float radius = 10;
+    [SerializeField, Range(0f, 1f)] private float opacity = 1f;
+    [SerializeField, Range(0.01f, 1f)] private float falloffRange = 1f;
+
+    [Header("Paint Control")]
+    // the particle system dictates the direction of the raycast
+    [SerializeField] private ParticleSystem particles;
+    [SerializeField] private float paintDistance = 100;
+    [SerializeField] private Transform[] paintableObjects;
+    
+    [Header("Colour Picker")]
+    [SerializeField] private Transform colourpicker;
+    [SerializeField] private Material paintCanister;
+
 
     // caching of copied textures for resets and efficiency
     private Dictionary<GameObject, Texture2D> cachedTextures = new Dictionary<GameObject, Texture2D>();
-
+    private Dictionary<GameObject, Texture2D> originalTextures = new Dictionary<GameObject, Texture2D>();
+    
     // data acquired while runtime for painting
     private Vector2 pixelUV;
     private Texture2D copyTexture;
@@ -26,6 +37,7 @@ public class Paint : MonoBehaviour
     void Start()
     {
         particles.Stop();
+        CacheOriginalTextures();
     }
 
     void Update()
@@ -78,6 +90,8 @@ public class Paint : MonoBehaviour
 
             ParticleSystem.MainModule main = particles.main;
             main.startColor = color;
+
+            paintCanister.color = color;
         }
 
     }
@@ -101,7 +115,9 @@ public class Paint : MonoBehaviour
 
         // apply the changes and update the material
         copyTexture.Apply();
-        targetRenderer.material.SetTexture("_MainTex", copyTexture);
+        // older version may use "_MainTex"
+        targetRenderer.material.SetTexture("_BaseMap", copyTexture);
+
     }
 
     private void GetTextureCopy()
@@ -141,11 +157,20 @@ public class Paint : MonoBehaviour
             copyTexture.Apply();
             RenderTexture.active = null;
         }
-        else if (mainTexture is Texture2D texture2D)
+        else if (mainTexture is Texture2D texture2D) // Testing if this works
         {
-            copyTexture = new Texture2D(texture2D.width, texture2D.height, texture2D.format, false);
-            copyTexture.SetPixels(texture2D.GetPixels());
+            // blit into a RenderTexture first to handle any compressed/unsupported format
+            RenderTexture rt = RenderTexture.GetTemporary(texture2D.width, texture2D.height, 0, RenderTextureFormat.ARGB32);
+
+            Graphics.Blit(texture2D, rt);
+
+            RenderTexture.active = rt;
+            copyTexture = new Texture2D(texture2D.width, texture2D.height, TextureFormat.RGBA32, false);
+            copyTexture.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
             copyTexture.Apply();
+            RenderTexture.active = null;
+
+            RenderTexture.ReleaseTemporary(rt);
         }
         else
         {
@@ -226,7 +251,12 @@ public class Paint : MonoBehaviour
                 bool isOnCircle = distanceSquared < area;
                 if (isOnCircle)
                 {
-                    copyTexture.SetPixel(width, height, color);
+                    Color existingColor = copyTexture.GetPixel(width, height);
+                    
+                    // 0 = center, 1 = edge
+                    float distance = Mathf.Sqrt(distanceSquared) / radius; 
+                    float falloff = 1f - Mathf.Clamp01(distance / falloffRange);
+                    copyTexture.SetPixel(width, height, Color.Lerp(existingColor, c, opacity * falloff));
                 }
             }
         }
@@ -237,4 +267,87 @@ public class Paint : MonoBehaviour
         particles.Stop();
         continuePainting = false;
     }
+
+    // Fix the CacheOriginalTextures method - add a check before adding to dictionary
+private void CacheOriginalTextures()
+{
+    foreach (Transform paintableObject in paintableObjects)
+    {
+        if (paintableObject == null) continue;
+
+        GameObject obj = paintableObject.gameObject;
+        
+        // ADDED: Skip if already cached (prevents duplicates)
+        if (originalTextures.ContainsKey(obj))
+        {
+            Debug.LogWarning($"PAINT_GUN >>> {obj.name} is duplicated in paintableObjects array, skipping...");
+            continue;
+        }
+
+        Renderer renderer = paintableObject.GetComponent<Renderer>();
+        if (renderer == null) continue;
+
+        Texture mainTexture = renderer.material.mainTexture;
+        if (mainTexture == null)
+        {
+            mainTexture = renderer.material.GetTexture("_BaseMap");
+        }
+
+        if (mainTexture == null) continue;
+
+        // Create a copy of the original texture
+        Texture2D originalCopy = null;
+
+        if (mainTexture is RenderTexture renderTexture)
+        {
+            RenderTexture.active = renderTexture;
+            originalCopy = new Texture2D(renderTexture.width, renderTexture.height, TextureFormat.RGBA32, false);
+            originalCopy.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
+            originalCopy.Apply();
+            RenderTexture.active = null;
+        }
+        else if (mainTexture is Texture2D texture2D)
+        {
+            RenderTexture rt = RenderTexture.GetTemporary(texture2D.width, texture2D.height, 0, RenderTextureFormat.ARGB32);
+            Graphics.Blit(texture2D, rt);
+            RenderTexture.active = rt;
+            originalCopy = new Texture2D(texture2D.width, texture2D.height, TextureFormat.RGBA32, false);
+            originalCopy.ReadPixels(new Rect(0, 0, rt.width, rt.height), 0, 0);
+            originalCopy.Apply();
+            RenderTexture.active = null;
+            RenderTexture.ReleaseTemporary(rt);
+        }
+
+        if (originalCopy != null)
+        {
+            originalTextures.Add(obj, originalCopy);
+            Debug.Log($"PAINT_GUN >>> Cached original texture for: {obj.name}");
+        }
+    }
+}
+
+// Add this new public method to reset all textures
+public void ResetAllTextures()
+{
+    foreach (var kvp in originalTextures)
+    {
+        GameObject obj = kvp.Key;
+        Texture2D originalTexture = kvp.Value;
+
+        if (obj == null) continue;
+
+        Renderer renderer = obj.GetComponent<Renderer>();
+        if (renderer == null) continue;
+
+        // Restore the original texture
+        renderer.material.SetTexture("_BaseMap", originalTexture);
+        
+        Debug.Log($"PAINT_GUN >>> Reset texture for: {obj.name}");
+    }
+
+    // Clear the modified texture cache
+    cachedTextures.Clear();
+    
+    Debug.Log("PAINT_GUN >>> All textures reset to original state");
+}
 }
